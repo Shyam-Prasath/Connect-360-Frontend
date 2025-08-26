@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://connect-360-backend.onrender.com/api",
 });
 
 // Always attach token if present

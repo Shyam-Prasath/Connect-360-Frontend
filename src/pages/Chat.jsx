@@ -4,7 +4,7 @@ import { FaEllipsisV, FaMicrophone, FaPaperPlane, FaPhone, FaSmile, FaVideo } fr
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000", {
+const socket = io("https://connect-360-backend.onrender.com", {
   transports: ["websocket", "polling"],
 });
 
@@ -59,7 +59,7 @@ const Chat = () => {
     formData.append("receiver", userId);
 
     try {
-      const res = await fetch("http://localhost:5000/api/messages/upload", {
+      const res = await fetch("https://connect-360-backend.onrender.com/api/messages/upload", {
         method: "POST",
         body: formData,
       });
@@ -79,7 +79,7 @@ const Chat = () => {
     if (!userId) return;
     const fetchOtherUser = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/auth/id/${userId}`);
+        const res = await fetch(`https://connect-360-backend.onrender.com/api/auth/id/${userId}`);
         const data = await res.json();
         setOtherUser(data);
       } catch (err) {
@@ -95,7 +95,7 @@ const Chat = () => {
     const fetchHistory = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/messages/${localUser._id}/${userId}`
+          `https://connect-360-backend.onrender.com/api/messages/${localUser._id}/${userId}`
         );
         const data = await res.json();
         setMessages(data);
@@ -151,7 +151,7 @@ const Chat = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/messages/send", {
+      const response = await fetch("https://connect-360-backend.onrender.com/api/messages/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(msgData),
@@ -302,7 +302,7 @@ const Chat = () => {
                   {m.fileUrl && (
                     <div className="mt-2">
                       <a
-                        href={`http://localhost:5000${m.fileUrl}`}
+                        href={`https://connect-360-backend.onrender.com${m.fileUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`inline-flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 hover:scale-105 ${

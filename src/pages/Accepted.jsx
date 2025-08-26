@@ -29,12 +29,12 @@ const Accepted = () => {
         if (!userId) return;
 
         try {
-            const sentRes = await axios.post("http://localhost:5000/api/invites/sent", { userId });
+            const sentRes = await axios.post("https://connect-360-backend.onrender.com/api/invites/sent", { userId });
             const acceptedSent = sentRes.data
                 .filter(inv => inv.status === "accepted")
                 .map(inv => ({ ...inv.to, inviteId: inv._id }));
 
-            const receivedRes = await axios.post("http://localhost:5000/api/invites/received", { userId });
+            const receivedRes = await axios.post("https://connect-360-backend.onrender.com/api/invites/received", { userId });
             const acceptedReceived = receivedRes.data
                 .filter(inv => inv.status === "accepted")
                 .map(inv => ({ ...inv.from, inviteId: inv._id }));
@@ -61,7 +61,7 @@ const Accepted = () => {
     const handleAccept = async (inviteId) => {
         setProcessingInvites(prev => ({ ...prev, [inviteId]: 'accepting' }));
         try {
-            await axios.post("http://localhost:5000/api/invites/accept", { inviteId });
+            await axios.post("https://connect-360-backend.onrender.com/api/invites/accept", { inviteId });
             await fetchData();
         } catch (err) {
             console.error("Error accepting invite", err);
@@ -73,7 +73,7 @@ const Accepted = () => {
     const handleIgnore = async (inviteId) => {
         setProcessingInvites(prev => ({ ...prev, [inviteId]: 'ignoring' }));
         try {
-            await axios.delete("http://localhost:5000/api/invites/ignore", { data: { inviteId } });
+            await axios.delete("https://connect-360-backend.onrender.com/api/invites/ignore", { data: { inviteId } });
             await fetchData();
         } catch (err) {
             console.error("Error ignoring invite", err);

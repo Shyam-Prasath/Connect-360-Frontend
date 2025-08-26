@@ -32,7 +32,7 @@ const Upload = () => {
   // Fetch files
   const fetchFiles = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/files", {
+      const res = await axios.get("https://connect-360-backend.onrender.com/api/files", {
         params: { search: searchTerm }
       });
       setFiles(res.data);
@@ -62,7 +62,7 @@ const Upload = () => {
       setIsUploading(true);
       setUploadStatus("Uploading file...");
 
-      await axios.post("http://localhost:5000/api/files/upload", formData, {
+      await axios.post("https://connect-360-backend.onrender.com/api/files/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (progressEvent) => {
           if (progressEvent.total) {

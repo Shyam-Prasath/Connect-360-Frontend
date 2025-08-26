@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import io from "socket.io-client";
 
 // init socket
-const socket = io("http://localhost:5000", { transports: ["websocket", "polling"] });
+const socket = io("https://connect-360-backend.onrender.com", { transports: ["websocket", "polling"] });
 
 const VideoCall = () => {
   const { userId } = useParams();
